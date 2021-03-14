@@ -14,37 +14,49 @@
 //     console.log("servidor subiu");
 // })
 
-console.log('Torre de hanoi')
-
-let torreA = [3, 2 ,1];
-let torreB = [];
-let torreC = [];
-
-function exibirTorres(){
-    console.log('Torre A - ' + torreA);
-  console.log('Torre B - ' + torreB);
-  console.log('Torre C - ' + torreC);
-}
-
 function verificarCondicaoVitoria(array){
-return (array[0] ===  3 && array[1] === 2 && array[2] === 1)? true:false
-}
-
-function verificarVitoria(array){
-if(verificarCondicaoVitoria(array) === false){
-return "Ainda não concluiu o jogo, realize mais uma jogada"
-}else{
-return "Parabens pela conquista, voce conseguiu!!"
-}
+  return (array[0] ===  3 && array[1] === 2 && array[2] === 1)? true:false
 }
 
 function regraMovimento(numOrigem, numDestino){
-if(numDestino === undefined){
-	return false;
-}else{
-return (numOrigem > numDestino)? true:false
+  if(numDestino === undefined){
+    return false;
+  }else{
+  return (numOrigem > numDestino)? true:false
+  }
 }
+  
+
+const jogo = {
+  exibirTorres: function(torreA, torreB, torreC) {
+    console.log('Torre A - ' + torreA);
+    console.log('Torre B - ' + torreB);
+    console.log('Torre C - ' + torreC);
+  },
+  verificarCondicaoVitoria: function(array){
+    return (array[0] ===  3 && array[1] === 2 && array[2] === 1)? true:false
+  },
+  verificarVitoria: function(array) {
+    if(verificarCondicaoVitoria(array) === false){
+        return console.log("Ainda não concluiu o jogo, realize mais uma jogada");
+      }else{
+        return console.log("Parabens pela conquista, voce conseguiu!!");
+      }
+  },
+  movimentarPeca: function(torreOrigem, torreDestino){
+    if( regraMovimento(torreOrigem[torreOrigem.length - 1], torreDestino[torreDestino.length - 1]) === true ){
+      console.log('Movimento invalido, uma peca maior não pode sobrepor uma peca menor');
+      }else{
+        let peca = torreOrigem.pop();
+        torreDestino.push(peca); 
+      }
+  }
 }
+
+module.exports = jogo;
+
+
+
 
 function consultaPecaTorre(peca, array){
 	let possui = array.indexOf(peca);
